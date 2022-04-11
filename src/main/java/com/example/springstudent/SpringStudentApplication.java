@@ -41,15 +41,15 @@ public class SpringStudentApplication {
     @Bean
     CommandLineRunner saveUsers(SecurityService securityService) {
         return args -> {
-            securityService.saveUser("fatima","1234","1234");
-            securityService.saveUser("hassan", "1234", "1234");
+          //  securityService.saveUser("fatima","1234","1234");
+           // securityService.saveUser("hassan", "1234", "1234");
 
-            securityService.saveRole("USER", "role user");
-            securityService.saveRole("ADMIN", "role admin");
+            //securityService.saveRole("USER", "role user");
+            //securityService.saveRole("ADMIN", "role admin");
 
-            securityService.addRoleToUser("fatima", "USER");
-            securityService.addRoleToUser("fatima", "ADMIN");
-            securityService.addRoleToUser("hassan", "USER");
+           // securityService.addRoleToUser("fatima", "USER");
+            //securityService.addRoleToUser("fatima", "ADMIN");
+           // securityService.addRoleToUser("hassan", "USER");
         };
     }
 
