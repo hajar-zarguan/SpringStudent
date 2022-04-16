@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="template1">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div layout:fragment="content1">
+<div class="container" style="margin: 60px">
+    <div class="card border-success mb-3 text-center">
+        <div class="card-header " style="background-color: #436409; color: white">
+            Les informations de l'étudiant : <span th:text="${student.nom} + ' ' +${student.prenom} "> </span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <div class="form-group mt-2">
+                <label class="control-label">ID : </label>
+                <label th:text="${student.id}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Nom : </label>
+                <label th:text="${student.nom}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Prenom : </label>
+                <label th:text="${student.prenom}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Email : </label>
+                <label th:text="${student.email}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Date de naissance : </label>
+                <label th:text="${student.dateNaissance}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Genre : </label>
+                <label th:text="${student.genre}"></label>
+            </div>
+            <div class="form-group mt-2">
+                <label class="control-label">Etat de regle : </label>
+                <label th:text="${student.isRegle()}"></label>
+            </div>
+
+            <div class="mt-4">
+                <a class="btn btn-outline-success" th:href="@{/user/index(id=${student.id}, keyword=${keyword}, page=${page})}">
+                    <i class="fas fa-arrow-alt-circle-left"></i>
+                </a>
+                <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-success"
+                   th:href="@{/admin/editStudent(id=${student.id})}">
+                    <i class="fas fa-user-edit"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="card-footer " style="background-color: #436409; color: white">
+            dernière modification : 2 jours
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+</body>
+</html>

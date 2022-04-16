@@ -41,6 +41,7 @@ public class Student {
     private String email;
 
     // - Son genre : MASCULIN ou FEMININ
+    @Enumerated(EnumType.STRING)
     Genre  genre ;
 
     // - Un attribut qui indique si il est en règle ou non

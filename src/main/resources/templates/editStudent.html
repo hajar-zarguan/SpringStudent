@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier les informations d'un étudiant</title>
+
+</head>
+<body>
+
+<div layout:fragment="content1">
+    <div class="container ">
+        <div class="row">
+            <div class="col">
+          <!--      <img th:src="@{ 'https://media.istockphoto.com/photos/handsome-afro-student-posing-on-bookshelves-background-picture-id1171062918?k=20&m=1171062918&s=612x612&w=0&h=I6djuMs92BCgJaBv5iIsPALt2oZ8mYQU7ttF1hmhPkE='">
+         -->
+                <figure class="figure">
+                    <img th:src="@{/images/user4.jpg}" class="figure-img img-fluid rounded" style="width: 800px ; margin-top: 100px"alt="Images ">
+                    <figcaption class="figure-caption text-right">Modifier les informations de nouveau étudiant.</figcaption>
+                </figure>
+            </div>
+            <div class="col">
+                <form method="post" th:action="@{/admin/save(page=${page},keyword=${keyword})}">
+                    <div class="form-group mt-2">
+                        <label class="control-label"  style="padding:10px"><i class="fa-solid fa-universal-access"style="margin-right: 10px"></i>Nom</label>
+                        <input class="form-control" name="nom" placeholder="Entrer le nom" type="text" th:required="required" th:value="${student.nom}">
+                        <span th:errors="${student.nom}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label"  style="padding:10px; "><i class="fa-solid fa-universal-access" style="margin-right: 10px"></i>Prénom</label>
+                        <input class="form-control" placeholder="Entrer le prénom" name="prenom" type="text" th:required="required" th:value="${student.prenom}">
+                        <span th:errors="${student.prenom}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label class="control-label"  style="padding:10px"><i class="fa-solid fa-at" style="margin-right: 10px"></i>Email</label>
+                        <input class="form-control" name="email" placeholder="Entrer ton email" type="text" th:required="required" th:value="${student.email}">
+                        <span th:errors="${student.email}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2"  style="padding:10px">
+                        <label class="control-label"><i class="fas fa-calendar-alt" style="margin-right: 10px"></i>Date de naissance</label>
+                        <input class="form-control" name="dateNaissance"  placeholder="Date of Birth" type="date" th:required="required"
+                               th:value="${student.dateNaissance}">
+                        <span th:errors="${student.dateNaissance}" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div th:each="model : ${T(com.example.springstudent.entities.Genre).values()}">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" th:field="*{student.genre}" th:value="${model}" class="custom-control-input">
+                            <label class="custom-control-label" th:for="${#ids.prev('genre')}" th:text="${model}">model</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label class="control-label">Règle</label>
+
+                        <!-- <input name="enRegle" class="form-check-input" type="checkbox" th:checked="${student.isRegle()}" >
+                           <span th:errors="${student.isRegle()}" class="text-danger"></span>                      <input class="form-control" name="enregle" type="hidden" th:value="${student.isRegle}">
+                        -->
+                    </div>
+                    <div class="mt-4">
+                        <a class="btn btn-outline-success" th:href="@{/user/index(id=${student.id}, keyword=${keyword}, page=${page})}">
+                            <i class="fas fa-arrow-alt-circle-left"></i>
+                        </a>
+                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i></button>
+                    </div>
+                </form>
+          </div>
+
+</div>
+
+
+    </div>
+</div>
+</body>
+</html>

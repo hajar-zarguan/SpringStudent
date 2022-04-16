@@ -1,74 +1,83 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="template1"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf.org/extras/spring-security">
->
+      >
 <head>
     <meta charset="UTF-8">
-    <title>title</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.8.1/font/bootstrap-icons.css">
+    <title>Students Management</title>
+
 </head>
 <body>
 <div layout:fragment="content1">
     <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                Liste des étudiants
-                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" th:href="@{/admin/add}">
-                    <i class="icon-eye">+</i>
-                </a>
-            </div>
-            <div class="card-body">
+
                 <form method="get" th:action="@{/user/index}">
-                    <label>Key word</label>
-                    <input type="text" name="keyword" th:value="${keyword}">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <label>Chercher un étudiant :</label>
+                    <input type="text" name="keyword" placeholder="Nom de l'étudiant"  class="text-success" th:value="${keyword}">
+                    <button type="submit" class="btn " style="color:#405f04;"><i class="fas fa-search"></i></button>
                 </form>
+        <ul class="nav-pills nav">
+            <li sec:authorize="hasAuthority('ADMIN')">
+                <a class="btn btn-outline-success mt-4" th:href="@{/admin/formStudents}"><i class="fas fa-user-plus"></i></a>
+            </li>
+        </ul>
+
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Date</th>
-                        <th>isRegle</th>
-                        <th>genre</th>
-                        <th>Action</th>
+                    <tr style="color: #405f04">
+                        <th><i class="fa-solid fa-id-card-clip"></i> Id</th>
+                        <th><i class="fa-solid fa-universal-access"></i> Nom</th>
+                        <th><i class="fa-solid fa-universal-access"></i></i> Prénom</th>
+                        <th><i class="fas fa-calendar-alt"></i> Date de Naissance</th>
+                        <th><i class="fa-solid fa-at"></i> Email</th>
+                        <th><i class="fa-solid fa-venus-mars"></i> Genre</th>
+                        <th><i class="fa-solid fa-tags"></i> Etat de régle</th>
+                        <th><i class="fa-solid fa-list-check"></i> Oprération</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="p:${ListStudents}">
-                        <td th:text="${p.id}"></td>
-                        <td th:text="${p.nom}"></td>
-                        <td th:text="${p.dateNaissance}"></td>
-                        <td th:text="${p.isRegle}"></td>
-                        <td th:text="${p.genre}"></td>
-                        <td sec:authorize="hasAuthority('ADMIN')">
-                            <a onclick="return confirm('Etes vous sure ?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
-                                <i class="bi bi-trash"></i>
+                    <tr th:each="s:${listStudents}">
+                        <td  style="font-style: italic; color: darkgreen "  th:text="${s.id}"></td>
+                        <td th:text="${s.nom}"></td>
+                        <td th:text="${s.prenom}"></td>
+                        <td th:text="${s.dateNaissance}"></td>
+                        <td th:text="${s.email}"></td>
+                        <!--<td th:switch="${s.genre}">
+                            <span th:case="'FEMININ'" style="color: deeppink"> <i class="fa-solid fa-child-dress"></i> F</span>
+                            <span th:case="'MASCULIN'" style="color: blue"> <i class="fa-solid fa-child"></i> M</span>
+                        </td>-->
+                        <td th:text="${s.genre}"></td>
+                        <td th:text="${s.isRegle()}"></td>
+                        <td>
+                            <a sec:authorize="hasAuthority('ADMIN')" onclick="return confirm('vous etes sur de supprimer cet éudiant?')"
+                              style="color: #691818" class="btn"
+                               th:href="@{/admin/delete(id=${s.id}, keyword=${keyword}, page=${currentPage})}"><i class="fa-solid fa-delete-left"></i>
+                             </a>
+                            <a sec:authorize="hasAuthority('ADMIN')" style="color:#227c22;" class="btn"
+                               th:href="@{/admin/editStudent(id=${s.id}, keyword=${keyword}, page=${currentPage})}">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                        </td>
-                        <td sec:authorize="hasAuthority('ADMIN')">
-                            <a class="btn btn-warning" th:href="@{/admin/update(id=${p.id}, page=${currentPage}, keyword=${keyword})}">
-                                <i class="bi bi-pen"></i>
+                            <a style="color:#405f04;" class="btn"
+                               th:href="@{/user/listStudent(id=${s.id}, keyword=${keyword}, page=${currentPage})}">
+                                <i class="fa-solid fa-circle-info"></i>
                             </a>
-
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <ul class="nav nav-pills">
                     <li th:each="page,status:${pages}">
-                        <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
+                        <a th:class="${status.index==currentPage?'btn btn-success ms-1':'btn btn-outline-success ms-1'}"
                            th:text="${status.index}"
-                           th:href="@{/user/index(page=${status.index}, keyword=${keyword})}">
-                        </a>
+                           th:href="@{/user/index(page=${status.index},keyword=${keyword})}"></a>
                     </li>
+
                 </ul>
-            </div>
-        </div>
+
+
+
     </div>
 </div>
 </body>

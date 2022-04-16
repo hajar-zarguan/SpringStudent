@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3524cd17-79c8-4d8e-86e6-0af6a2f4a160" name="Changes" comment="">
+    <list default="true" id="3524cd17-79c8-4d8e-86e6-0af6a2f4a160" name="Changes" comment="modif 12pm">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/403.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringStudent.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SpringStudent.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/SpringStudentApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/SpringStudentApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addStudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/Web/SecurityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/Web/SecurityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/Web/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/Web/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/entities/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/entities/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/entities/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/Service/ServiceSecurityImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/Service/ServiceSecurityImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/Service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/Service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/entities/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springstudent/security/entities/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addStudent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/students.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/students.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/updateStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/updateStudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/template1.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/template1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/updateStudent.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +56,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
@@ -65,8 +80,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="E:/Seance6" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../clone/ELMAJNI_Khaoula_JEE/Activité_Pratique_semaine9/student-mvc" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\SpringStudent\src\main\resources\static\images" />
+      <recent name="D:\SpringStudent\src\main\resources\static" />
+      <recent name="D:\SpringStudent\src\main\resources\templates" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="SpringStudentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -85,8 +107,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1649669558969</updated>
-      <workItem from="1649669560750" duration="8626000" />
+      <workItem from="1649669560750" duration="8873000" />
+      <workItem from="1649682777532" duration="45000" />
+      <workItem from="1650061881639" duration="31315000" />
     </task>
+    <task id="LOCAL-00001" summary="modif 12pm">
+      <created>1649678478998</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649678478998</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +134,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modif" />
+    <MESSAGE value="modif 12pm" />
+    <option name="LAST_COMMIT_MESSAGE" value="modif 12pm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

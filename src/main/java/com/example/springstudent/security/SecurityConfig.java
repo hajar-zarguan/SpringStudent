@@ -18,69 +18,56 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    @Autowired
     private DataSource dataSource;
-
-    private UserDetailsServiceImpl userDetailsServiceImpl;
-
+    @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
     @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		/*
-		// comment spring va chercher les roles et les utilisateurs : la strategie
-        //le plus simple c est memory Auth pour dire que les utilisateurs qui ont le droit d acceder à l app sont sotckés en memoire
-		//cette methode pratique si nous faisons des tests
-		//par defaut spring chiffre les mots de passe donc il faut les chifrés
-		PasswordEncoder passwordEncoder = passwordEncoder();
-		String encodedPWD = passwordEncoder.encode("1234"); // BCrypt algorithme
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        /* la stratégie comment spring sec va chercher les users*/
+        //ici comment spring sec va chercher les users & roles
+        //BDD pour chercher un user ou des users mémoire ou annuaire LDAP
+        //pour ne pas encoder les pwd {noop} ==>.password("{noop}123")
+        //PasswordEncoder passwordEncoder = passwordEncoder();
+        /*//mem auth
+        String encodedPwd = passwordEncoder.encode("123");
+        System.out.println(encodedPwd);
+        auth.inMemoryAuthentication().withUser("user1").password(encodedPwd).roles("USER");
+        auth.inMemoryAuthentication().withUser("user2").password(passwordEncoder.encode("123")).roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("123")).roles("USER","ADMIN");*/
 
-		authenticationManagerBuilder.inMemoryAuthentication()
-		.withUser("user").password(encodedPWD).roles("USER")
-		//.withUser("user").password("{noop}1234").roles("USER") = no password encoder
-		.and()
-		.withUser("admin").password(encodedPWD).roles("ADMIN","USER");
-		*/
+        //JDBC auth
+        /*auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username as principal, password as credentials, active from users where username =?")
+                .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
+                .rolePrefix("ROLE_")
+                .passwordEncoder(passwordEncoder);*/
 
-//JDBC authenticated
-        //il faut créer 3 tables dans la BD
-        //table users avec username (primary key) password et active (prends soit 0 ou 1)
-        //une table role avec 1 champs roleName(primary key)
-        //et une table ussers_roles avec deux champs username(primary key) et role(primary key)
-        //par defaut spring chiffre les mots de passe donc il faut les chifrés
-
-        //pour inserer un utilisateur dans la table faire ceci pour trouver le password chiffré de 1234 puis ajouter un utilisateur avec le password trouvé
-
-        //String encodedPWD = passwordEncoder.encode("1234");
-        //System.out.println(encodedPWD);
-		/*
-		authenticationManagerBuilder.jdbcAuthentication()
-			.dataSource(dataSource)
-			.usersByUsernameQuery("select username as principal, password as credentials, active from users where username=?")
-			.authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
-			.rolePrefix("ROLE_")
-			.passwordEncoder(passwordEncoder);
-			*/
-//user detail service
-        authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl);
+        //user details service auth
+        auth.userDetailsService(userDetailsService);
     }
-    //pour spécifier les droits d'accés
-
-
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin(); //formulaire par defaut
-        //si on veut specifier notre propre formulaire:
-        // http.formLogin().("/login");
+        //je demande à spring sec une formulaire d'auth
+        /*pour une formulaire personnalisée
+         *http.formLogin().loginPage("/login"); */
+        //http.formLogin().loginPage("/auth");
+        http.formLogin();
+        //ne nécessite pas une auth
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");
-        http.authorizeRequests().antMatchers("/user/**").hasAuthority("USER");
+        http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/user/**").hasAnyAuthority("USER");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
-        http.authorizeHttpRequests().anyRequest().authenticated(); // toute route necessite une authentification
-        http.exceptionHandling().accessDeniedPage("/404");
+        /*gérer les droits d'accés*/
+        //toutes les req nécessite une auth
+        http.authorizeRequests().anyRequest().authenticated();
+        //gestion des exceptions
+        http.exceptionHandling().accessDeniedPage("/403");
     }
 
-}
 
+}

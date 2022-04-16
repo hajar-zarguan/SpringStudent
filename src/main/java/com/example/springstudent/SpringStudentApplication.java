@@ -21,37 +21,40 @@ public class SpringStudentApplication {
         SpringApplication.run(SpringStudentApplication.class, args);
     }
 
-
     @Bean
-    PasswordEncoder passwordEncoder() {
+        //au démarrage crée moi un PasswordEncoder et tu le place dans context
+    BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    //@Bean
-    CommandLineRunner commandeLineRunner(StudentRepository studentRepository ) {
+
+  // @Bean
+    CommandLineRunner commandLineRunner(StudentRepository studentRepository){
         return args -> {
-            studentRepository.save(new Student(null,"Salwa","leila",new Date(),"@gmqil", Genre.FEMININ,true));
-            studentRepository.save(new Student(null,"anas","hilal",new Date(),"@gmqil", Genre.MASCULIN,true));
-            studentRepository.save(new Student(null,"Hanan","hilal",new Date(),"hanan@gmqil", Genre.FEMININ,true));
-            studentRepository.save(new Student(null,"anas","Omar",new Date(),"@gmqil", Genre.MASCULIN,true));
+            studentRepository.save(new Student(null,"Zarguan","Hajar",new Date(),"hajar@gmail", Genre.feminin,true));
+            studentRepository.save(new Student(null,"Soufian","Leila",new Date(),"anas@gmail", Genre.feminin,true));
+            studentRepository.save(new Student(null,"Saadaoui","hilal",new Date(),"hanan@gmail", Genre.masculin,true));
+            studentRepository.save(new Student(null,"Omar","Hiba",new Date(),"omar@gmail", Genre.feminin,true));
+
             studentRepository.findAll().forEach(p->{
                 System.out.println(p.getNom());
             });
+
         };
     }
-    @Bean
-    CommandLineRunner saveUsers(SecurityService securityService) {
-        return args -> {
-          //  securityService.saveUser("fatima","1234","1234");
-           // securityService.saveUser("hassan", "1234", "1234");
+   // @Bean
+    CommandLineRunner saveUsers(SecurityService securityService){
+        return args ->{
+            securityService.saveUser("hajar","1234","1234");
+            securityService.saveUser("mohammed","1234","1234");
 
-            //securityService.saveRole("USER", "role user");
-            //securityService.saveRole("ADMIN", "role admin");
+            securityService.saveRole("USER","");
+            securityService.saveRole("ADMIN","");
 
-           // securityService.addRoleToUser("fatima", "USER");
-            //securityService.addRoleToUser("fatima", "ADMIN");
-           // securityService.addRoleToUser("hassan", "USER");
+            securityService.addRoleToUser("hajar","USER");
+            securityService.addRoleToUser("hajar","ADMIN");
+            securityService.addRoleToUser("mohammed","USER");
+
+
         };
     }
-
 }
-

@@ -15,7 +15,7 @@ import java.util.List;
 public class AppUser {
     @Id
     @Column(length=50)
-    private String id;
+    private String userId;
     @Column(unique = true)
     private String username;
     private String password;
